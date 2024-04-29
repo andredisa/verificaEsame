@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor Utente as U
+actor Gestore as G
+
+rectangle SistemaNoleggioBiciclette {
+  U -- (Registrazione)
+  (Registrazione) .> (Login) : include
+  U -- (Login)
+  U -- (Noleggio Bicicletta)
+  U -- (Riconsegna Bicicletta)
+  U -- (Visualizza Mappa Stazioni)
+  U -- (Verifica Disponibilità Biciclette)
+  U -- (Ricezione Report Noleggi)
+  (Ricezione Report Noleggi) .> (Impostazione Temporizzazione Report) : include
+  U -- (Impostazione Temporizzazione Report)
+
+  G -- (Monitoraggio Biciclette in Uso)
+  G -- (Visualizzazione Biciclette Prelevate)
+  G -- (Gestione Utenti)
+  G -- (Gestione Stazioni)
+  G -- (Gestione Tariffe)
+}
+
+@enduml
