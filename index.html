@@ -23,9 +23,9 @@
             <div class="col-md-6">
                 <div id="buttons" class="mb-3">
                     <!-- Bottone per il login -->
-                    <button id="loginButton" class="btn btn-primary mr-2" onclick="login()">Login</button>
+                    <a id="loginButton" class="btn btn-primary mr-2" href="./progetto/pagine/login.php">Login</a>
                     <!-- Bottone per la registrazione -->
-                    <button id="registerButton" class="btn btn-primary" onclick="register()">Registrati</button>
+                    <button id="registerButton" class="btn btn-primary">Registrati</button>
                 </div>
             </div>
         </div>
@@ -63,14 +63,6 @@
                     title: stazione.nome
                 });
             });
-        }
-        
-        function login() {
-            window.location.href = "login.php";
-        }
-
-        function register() {
-            window.location.href = "registration.php";
         }
     </script>
 </body>
