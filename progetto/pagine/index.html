@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benvenuto</title>
+    <!-- Collegamento al foglio di stile di Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Stile CSS per il contenitore della mappa -->
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <header class="container mt-5">
+        <h1>Benvenuto al Servizio di Noleggio Biciclette</h1>
+    </header>
+
+    <main class="container mt-3">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="buttons" class="mb-3">
+                    <!-- Bottone per il login -->
+                    <button id="loginButton" class="btn btn-primary mr-2" onclick="login()">Login</button>
+                    <!-- Bottone per la registrazione -->
+                    <button id="registerButton" class="btn btn-primary" onclick="register()">Registrati</button>
+                </div>
+            </div>
+        </div>
+        <!-- Contenitore per la mappa -->
+        <div id="map"></div>
+    </main>
+
+    <!-- Script JavaScript per la gestione degli eventi -->
+    <script src="script.js"></script>
+    <!-- Script JavaScript per l'integrazione della mappa di Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8KBPTsGGJ62sLsC2pHgh_B-KCyNW_Vhw&callback=initMap"
+        async defer></script>
+    <!-- Script JavaScript per l'inizializzazione della mappa -->
+    <script>
+        // Funzione di inizializzazione della mappa
+        function initMap() {
+            // Array di posizioni delle stazioni (ad esempio)
+            var stazioni = [
+                { lat: 45.4641, lng: 9.1901, nome: "Stazione 1" },
+                { lat: 45.4639, lng: 9.1899, nome: "Stazione 2" },
+                { lat: 45.4640, lng: 9.1902, nome: "Stazione 3" }
+            ];
+
+            // Crea una nuova mappa di Google Maps
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 45.4642, lng: 9.1900 }, // Milano come esempio di posizione centrale
+                zoom: 13 // Livello di zoom predefinito
+            });
+
+            // Aggiungi marker per ciascuna stazione
+            stazioni.forEach(function (stazione) {
+                new google.maps.Marker({
+                    position: { lat: stazione.lat, lng: stazione.lng },
+                    map: map,
+                    title: stazione.nome
+                });
+            });
+        }
+        
+        function login() {
+            window.location.href = "login.php";
+        }
+
+        function register() {
+            window.location.href = "registration.php";
+        }
+    </script>
+</body>
+</html>
