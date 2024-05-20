@@ -69,4 +69,35 @@ class gestioneDB
 
         return $userID;
     }
+
+    // Metodo per aggiungere un nuovo utente
+    public function aggiungiUtente($email, $password, $nome, $cognome, $numero_tessera, $numero_carta_credito, $via, $città, $provincia, $regione, $CAP) {
+        $password = md5($password);
+
+        // Verifica se l'email è già registrata
+        $query = $this->connection->prepare("SELECT * FROM cliente WHERE email=?");
+        $query->bind_param("s", $email);
+        $query->execute();
+        $result = $query->get_result();
+
+        if ($result->num_rows > 0) {
+            $query->close();
+            return ["status" => false, "message" => "Email già registrata."];
+        }
+
+        $query->close();
+
+        // Inserisci il nuovo cliente
+        $query = $this->connection->prepare("INSERT INTO cliente (email, password, nome, cognome, numero_tessera, numero_carta_credito, via, città, provincia, regione, CAP) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $query->bind_param("ssssisssssi", $email, $password, $nome, $cognome, $numero_tessera, $numero_carta_credito, $via, $città, $provincia, $regione, $CAP);
+
+        if ($query->execute()) {
+            $query->close();
+            return ["status" => true, "message" => "Registrazione avvenuta con successo."];
+        } else {
+            $query->close();
+            return ["status" => false, "message" => "Errore durante l'inserimento nel database."];
+        }
+    }
 }
+?>
