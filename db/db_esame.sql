@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 29, 2024 alle 19:32
+-- Creato il: Mag 20, 2024 alle 19:52
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -30,10 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `ID` int(11) NOT NULL,
   `email` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `nome` varchar(32) NOT NULL,
   `cognome` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dump dei dati per la tabella `admin`
+--
+
+INSERT INTO `admin` (`ID`, `email`, `password`, `nome`, `cognome`) VALUES
+(1, 'andreadisanti22gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'andrea', 'disanti');
 
 -- --------------------------------------------------------
 
@@ -60,7 +67,7 @@ CREATE TABLE `bicicletta` (
 CREATE TABLE `cliente` (
   `ID` int(11) NOT NULL,
   `email` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `nome` varchar(32) NOT NULL,
   `cognome` varchar(32) NOT NULL,
   `numero_tessera` int(11) NOT NULL,
@@ -152,7 +159,7 @@ ALTER TABLE `stazione`
 -- AUTO_INCREMENT per la tabella `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `bicicletta`
