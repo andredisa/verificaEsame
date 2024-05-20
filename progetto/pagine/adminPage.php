@@ -4,40 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Admin</title>
+    <link rel="stylesheet" href="../style/styleAdmin.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Gestione Amministrativa</h1>
+        <h1 class="mb-4">Gestione Amministrativa</h1>
 
         <!-- Sezione Stazioni -->
-        <h2>Gestione Stazioni</h2>
-        <button class="btn btn-primary" id="addStation">Aggiungi Stazione</button>
-        <div id="stationForm" class="mt-3" style="display: none;">
+        <div class="section-header">
+            <h2>Gestione Stazioni</h2>
+            <button class="btn btn-primary mb-3" id="addStation">Aggiungi Stazione</button>
+        </div>
+        <div id="stationForm" class="section-form">
             <form id="newStationForm">
-                <div class="form-group">
-                    <label for="codice">Codice</label>
-                    <input type="text" id="codice" class="form-control" required>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="codice">Codice</label>
+                        <input type="text" id="codice" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="numero_slot">Numero Slot</label>
+                        <input type="number" id="numero_slot" class="form-control" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="numero_slot">Numero Slot</label>
-                    <input type="number" id="numero_slot" class="form-control" required>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="via">Via</label>
+                        <input type="text" id="via" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="città">Città</label>
+                        <input type="text" id="città" class="form-control" required>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="via">Via</label>
-                    <input type="text" id="via" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="città">Città</label>
-                    <input type="text" id="città" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="provincia">Provincia</label>
-                    <input type="text" id="provincia" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="regione">Regione</label>
-                    <input type="text" id="regione" class="form-control" required>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="provincia">Provincia</label>
+                        <input type="text" id="provincia" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="regione">Regione</label>
+                        <input type="text" id="regione" class="form-control" required>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="CAP">CAP</label>
@@ -47,8 +56,8 @@
             </form>
         </div>
 
-        <button class="btn btn-danger mt-3" id="removeStation">Rimuovi Stazione</button>
-        <div id="removeStationForm" class="mt-3" style="display: none;">
+        <button class="btn btn-danger mb-3" id="removeStation">Rimuovi Stazione</button>
+        <div id="removeStationForm" class="section-form">
             <form id="deleteStationForm">
                 <div class="form-group">
                     <label for="station_id">ID Stazione</label>
@@ -59,9 +68,11 @@
         </div>
 
         <!-- Sezione Slot -->
-        <h2>Gestione Slot</h2>
-        <button class="btn btn-primary" id="updateSlot">Aggiorna Numero Slot</button>
-        <div id="slotForm" class="mt-3" style="display: none;">
+        <div class="section-header">
+            <h2>Gestione Slot</h2>
+            <button class="btn btn-primary mb-3" id="updateSlot">Aggiorna Numero Slot</button>
+        </div>
+        <div id="slotForm" class="section-form">
             <form id="updateSlotForm">
                 <div class="form-group">
                     <label for="slot_id">ID Stazione</label>
@@ -76,17 +87,21 @@
         </div>
 
         <!-- Sezione Biciclette -->
-        <h2>Gestione Biciclette</h2>
-        <button class="btn btn-primary" id="addBike">Aggiungi Bicicletta</button>
-        <div id="bikeForm" class="mt-3" style="display: none;">
+        <div class="section-header">
+            <h2>Gestione Biciclette</h2>
+            <button class="btn btn-primary mb-3" id="addBike">Aggiungi Bicicletta</button>
+        </div>
+        <div id="bikeForm" class="section-form">
             <form id="newBikeForm">
-                <div class="form-group">
-                    <label for="codice_bike">Codice</label>
-                    <input type="text" id="codice_bike" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="GPS">GPS</label>
-                    <input type="text" id="GPS" class="form-control" required>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="codice_bike">Codice</label>
+                        <input type="text" id="codice_bike" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="GPS">GPS</label>
+                        <input type="text" id="GPS" class="form-control" required>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="RFID">RFID</label>
@@ -100,8 +115,8 @@
             </form>
         </div>
 
-        <button class="btn btn-danger mt-3" id="removeBike">Rimuovi Bicicletta</button>
-        <div id="removeBikeForm" class="mt-3" style="display: none;">
+        <button class="btn btn-danger mb-3" id="removeBike">Rimuovi Bicicletta</button>
+        <div id="removeBikeForm" class="section-form">
             <form id="deleteBikeForm">
                 <div class="form-group">
                     <label for="bike_id">ID Bicicletta</label>
@@ -112,9 +127,11 @@
         </div>
 
         <!-- Sezione Clienti -->
-        <h2>Gestione Clienti</h2>
-        <button class="btn btn-primary" id="updateUser">Modifica Informazioni Cliente</button>
-        <div id="userForm" class="mt-3" style="display: none;">
+        <div class="section-header">
+            <h2>Gestione Clienti</h2>
+            <button class="btn btn-primary mb-3" id="updateUser">Modifica Informazioni Cliente</button>
+        </div>
+        <div id="userForm" class="section-form">
             <form id="updateUserForm">
                 <div class="form-group">
                     <label for="user_id">ID Cliente</label>
