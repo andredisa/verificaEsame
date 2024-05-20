@@ -16,8 +16,7 @@ class gestioneDB
         $this->dbname = "db_esame";
     }
 
-    public function conn()
-    {
+    public function conn() {
         $this->connection = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
     }
     public function authenticateAdmin($email, $password)
@@ -100,5 +99,42 @@ public function authenticateUser($email, $password)
             return ["status" => false, "message" => "Errore durante l'inserimento nel database."];
         }
     }
+    public function addStation($codice, $numero_slot, $via, $città, $provincia, $regione, $CAP) {
+        $query = $this->connection->prepare("INSERT INTO stazione (codice, numero_slot, via, città, provincia, regione, CAP) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $query->bind_param("sissssi", $codice, $numero_slot, $via, $città, $provincia, $regione, $CAP);
+        return $query->execute();
+    }
+
+    public function removeStation($id) {
+        $query = $this->connection->prepare("DELETE FROM stazione WHERE ID=?");
+        $query->bind_param("i", $id);
+        return $query->execute();
+    }
+
+    public function updateSlot($id, $numero_slot) {
+        $query = $this->connection->prepare("UPDATE stazione SET numero_slot=? WHERE ID=?");
+        $query->bind_param("ii", $numero_slot, $id);
+        return $query->execute();
+    }
+
+    public function addBike($codice, $GPS, $RFID, $posizione_attuale) {
+        $attiva = 1;
+        $query = $this->connection->prepare("INSERT INTO bicicletta (codice, GPS, RFID, posizione_attuale, attiva) VALUES (?, ?, ?, ?, ?)");
+        $query->bind_param("ssssi", $codice, $GPS, $RFID, $posizione_attuale, $attiva);
+        return $query->execute();
+    }
+
+    public function removeBike($id) {
+        $query = $this->connection->prepare("DELETE FROM bicicletta WHERE ID=?");
+        $query->bind_param("i", $id);
+        return $query->execute();
+    }
+
+    public function updateUser($id, $email, $nome, $cognome, $numero_tessera, $numero_carta_credito, $via, $città, $provincia, $regione, $CAP) {
+        $query = $this->connection->prepare("UPDATE cliente SET email=?, nome=?, cognome=?, numero_tessera=?, numero_carta_credito=?, via=?, città=?, provincia=?, regione=?, CAP=? WHERE ID=?");
+        $query->bind_param("ssssssssssi", $email, $nome, $cognome, $numero_tessera, $numero_carta_credito, $via, $città, $provincia, $regione, $CAP, $id);
+        return $query->execute();
+    }
 }
+
 ?>
