@@ -32,7 +32,7 @@ class gestioneDB
         return $result->num_rows > 0;
     }
 
-    public function authenticateUser($email, $password)
+public function authenticateUser($email, $password)
     {
         $hashedPassword = md5($password);
         $query = $this->connection->prepare("SELECT * FROM cliente WHERE email=? AND password=?");
@@ -43,6 +43,7 @@ class gestioneDB
 
         return $result->num_rows > 0;
     }
+
 
     public function getAdminIDByEmail($email)
     {
