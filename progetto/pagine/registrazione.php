@@ -8,38 +8,41 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $("#registerForm").submit(function(event) {
-                event.preventDefault();
-                var formData = {
-                    email: $("#email").val(),
-                    password: $("#password").val(),
-                    nome: $("#nome").val(),
-                    cognome: $("#cognome").val(),
-                    numero_tessera: $("#numero_tessera").val(),
-                    numero_carta_credito: $("#numero_carta_credito").val(),
-                    via: $("#via").val(),
-                    città: $("#città").val(),
-                    provincia: $("#provincia").val(),
-                    regione: $("#regione").val(),
-                    CAP: $("#CAP").val()
-                };
+    $(document).ready(function() {
+        $("#registerForm").submit(function(event) {
+            event.preventDefault();
+            var formData = {
+                email: $("#email").val(),
+                password: $("#password").val(),
+                nome: $("#nome").val(),
+                cognome: $("#cognome").val(),
+                numero_tessera: $("#numero_tessera").val(),
+                numero_carta_credito: $("#numero_carta_credito").val(),
+                via: $("#via").val(),
+                città: $("#città").val(),
+                provincia: $("#provincia").val(),
+                regione: $("#regione").val(),
+                CAP: $("#CAP").val()
+            };
 
-                $.post("registrazione_process.php", formData, function(response) {
-                    if (response.status === true) {
-                        alert("Registrazione avvenuta con successo!");
-                        window.location = "login.php";
-                    } else {
-                        alert("Errore durante la registrazione: " + response.message);
-                    }
-                }, "json");
-            });
-
-            $("#home").click(function() {
-                window.location.href = "../index.html";
+            $.post("../ajax/registrazione_process.php", formData, function(response) {
+                if (response.status === true) {
+                    alert("Registrazione avvenuta con successo!");
+                    window.location = "homePage.php";
+                } else {
+                    alert("Errore durante la registrazione: " + response.message);
+                }
+            }, "json").fail(function() {
+                alert("Errore di comunicazione con il server.");
             });
         });
-    </script>
+
+        $("#home").click(function() {
+            window.location.href = "../index.html";
+        });
+    });
+</script>
+
 </head>
 <body>
     <div class="container">

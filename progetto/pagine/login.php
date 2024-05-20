@@ -34,25 +34,37 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            $("#loginForm").submit(function(event) {
-                event.preventDefault();
-                var email = $("#email").val();
-                var password = $("#password").val();
-                $.get("login_process.php", { email: email, password: password }, function(response) {
+    $(document).ready(function() {
+        $("#loginForm").submit(function(event) {
+            event.preventDefault();
+            var email = $("#email").val();
+            var password = $("#password").val();
+
+            $.ajax({
+                type: "POST",
+                url: "../ajax/login_process.php",
+                data: { email: email, password: password },
+                dataType: "json",
+                success: function(response) {
                     if (response.status === false) {
                         alert("Credenziali errate");
                     } else if (response.status === "admin") {
-                        window.location = "adminPage.php";
-                    } else {
-                        window.location = "homepage.php";
+                        window.location.href = "adminPage.php";
+                    } else if (response.status === "cliente") {
+                        window.location.href = "homePage.php";
                     }
-                });
-            });
-            $("#home").click(function() {
-                window.location = "index.php";
+                },
+                error: function(xhr, status, error) {
+                    console.error("Errore durante la richiesta: ", error);
+                    alert("Errore durante la richiesta. Si prega di riprovare.");
+                }
             });
         });
-    </script>
+        $("#home").click(function() {
+                window.location = "../index.html";
+        });
+    });
+</script>
+
 </body>
 </html>
