@@ -25,7 +25,7 @@
                     <!-- Bottone per il login -->
                     <a id="loginButton" class="btn btn-primary mr-2" href="pagine/login.php">Login</a>
                     <!-- Bottone per la registrazione -->
-                    <a id="registerButton" class="btn btn-primary mr-2" href="pagine/registrazione.php">registrazione</a>
+                    <a id="registerButton" class="btn btn-primary mr-2" href="pagine/registrazione.php">Registrazione</a>
                 </div>
             </div>
         </div>
@@ -33,35 +33,14 @@
         <div id="map"></div>
     </main>
 
-    <!-- Script JavaScript per la gestione degli eventi -->
-    <script src="script.js"></script>
+    <!-- Script JavaScript per la gestione della mappa -->
+    <script src="script/initMap.js"></script>
+    <script> var script = document.createElement('script'); </script>
     <!-- Script JavaScript per l'integrazione della mappa di Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8KBPTsGGJ62sLsC2pHgh_B-KCyNW_Vhw&callback=initMap" async defer></script>
-    <script>
-        function initMap() {
-            // Array di posizioni delle stazioni
-            var stazioni = [
-                { lat: 45.4641, lng: 9.1901, nome: "Stazione 1" },
-                { lat: 45.4639, lng: 9.1899, nome: "Stazione 2" },
-                { lat: 45.4640, lng: 9.1902, nome: "Stazione 3" }
-            ];
-
-            // Crea una nuova mappa di Google Maps
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 45.4642, lng: 9.1900 },
-                zoom: 13
-            });
-
-            // Aggiungi marker per ciascuna stazione
-            stazioni.forEach(function (stazione) {
-                new google.maps.Marker({
-                    position: { lat: stazione.lat, lng: stazione.lng },
-                    map: map,
-                    title: stazione.nome
-                });
-            });
-        }
-    </script>
-
 </body>
 </html>
+
+
+
+
