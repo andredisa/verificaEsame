@@ -211,17 +211,30 @@
 
             $("#newStationForm").submit(function(e){
                 e.preventDefault();
-                $.ajax({
-                    url: 'addStation.php',
-                    type: 'post',
-                    data: $(this).serialize(),
-                    success: function(response){
-                        alert(response.message);
-                        location.reload();
+
+                var address = $("#via").val() + ", " + $("#città").val() + ", " + $("#provincia").val() + ", " + $("#regione").val() + ", " + $("#CAP").val();
+                var geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode({'address': address}, function(results, status) {
+                    if (status == 'OK') {
+                        var location = results[0].geometry.location;
+                        $("#latitudine").val(location.lat());
+                        $("#longitudine").val(location.lng());
+
+                        $.ajax({
+                            url: 'addStation.php',
+                            type: 'post',
+                            data: $("#newStationForm").serialize(),
+                            success: function(response){
+                                alert(response.message);
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        alert("Geocode non riuscito: " + status);
                     }
                 });
             });
-
             $("#deleteStationForm").submit(function(e){
                 e.preventDefault();
                 $.ajax({
