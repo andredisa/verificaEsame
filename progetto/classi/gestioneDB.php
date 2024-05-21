@@ -99,11 +99,12 @@ public function authenticateUser($email, $password)
             return ["status" => false, "message" => "Errore durante l'inserimento nel database."];
         }
     }
-    public function addStation($codice, $numero_slot, $via, $città, $provincia, $regione, $CAP) {
-        $query = $this->connection->prepare("INSERT INTO stazione (codice, numero_slot, via, città, provincia, regione, CAP) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param("sissssi", $codice, $numero_slot, $via, $città, $provincia, $regione, $CAP);
+    public function addStation($codice, $numero_slot, $via, $città, $provincia, $regione, $CAP, $latitudine, $longitudine) {
+        $query = $this->connection->prepare("INSERT INTO stazione (codice, numero_slot, via, città, provincia, regione, CAP, latitudine, longitudine) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $query->bind_param("sissssiff", $codice, $numero_slot, $via, $città, $provincia, $regione, $CAP, $latitudine, $longitudine);
         return $query->execute();
     }
+    
 
     public function removeStation($id) {
         $query = $this->connection->prepare("DELETE FROM stazione WHERE ID=?");
