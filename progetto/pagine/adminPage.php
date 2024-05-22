@@ -1,301 +1,421 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Admin</title>
-    <link rel="stylesheet" href="../style/styleAdmin.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Admin Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8KBPTsGGJ62sLsC2pHgh_B-KCyNW_Vhw"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 {
+            color: #333333;
+            text-align: center;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+        .section-header {
+            border-bottom: 1px solid #ced4da;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .section-header h2 {
+            margin-bottom: 20px;
+        }
+        .section-form {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: #007bff;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Gestione Amministrativa</h1>
+    <div class="container">
+        <h1>Admin Page</h1>
 
-        <!-- Sezione Stazioni -->
-        <div class="section-header">
-            <h2>Gestione Stazioni</h2>
-            <button class="btn btn-primary mb-3" id="addStation">Aggiungi Stazione</button>
-        </div>
-        <div id="stationForm" class="section-form">
-            <form id="newStationForm">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="codice">Codice</label>
-                        <input type="text" id="codice" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="numero_slot">Numero Slot</label>
-                        <input type="number" id="numero_slot" class="form-control" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="via">Via</label>
-                        <input type="text" id="via" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="città">Città</label>
-                        <input type="text" id="città" class="form-control" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="provincia">Provincia</label>
-                        <input type="text" id="provincia" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="regione">Regione</label>
-                        <input type="text" id="regione" class="form-control" required>
-                    </div>
+        <!-- Aggiungi Stazione -->
+        <section id="addStation">
+            <div class="section-header">
+                <h2>Aggiungi Stazione</h2>
+            </div>
+            <form id="addStationForm" class="section-form">
+                <div class="form-group">
+                    <label for="codice">Codice:</label>
+                    <input type="text" id="codice" name="codice" required>
                 </div>
                 <div class="form-group">
-                    <label for="CAP">CAP</label>
-                    <input type="number" id="CAP" class="form-control" required>
+                    <label for="numero_slot">Numero di Slot:</label>
+                    <input type="number" id="numero_slot" name="numero_slot" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Aggiungi</button>
+                <div class="form-group">
+                    <label for="via">Via:</label>
+                    <input type="text" id="via" name="via" required>
+                </div>
+                <div class="form-group">
+                    <label for="città">Città:</label>
+                    <input type="text" id="città" name="città" required>
+                </div>
+                <div class="form-group">
+                    <label for="provincia">Provincia:</label>
+                    <input type="text" id="provincia" name="provincia" required>
+                </div>
+                <div class="form-group">
+                    <label for="regione">Regione:</label>
+                    <input type="text" id="regione" name="regione" required>
+                </div>
+                <div class="form-group">
+                    <label for="CAP">CAP:</label>
+                    <input type="text" id="CAP" name="CAP" required>
+                </div>
+                <div class="form-group">
+                    <label for="latitudine">Latitudine:</label>
+                    <input type="text" id="latitudine" name="latitudine" required>
+                </div>
+                <div class="form-group">
+                    <label for="longitudine">Longitudine:</label>
+                    <input type="text" id="longitudine" name="longitudine" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Aggiungi Stazione</button>
             </form>
-        </div>
+        </section>
 
-        <button class="btn btn-danger mb-3" id="removeStation">Rimuovi Stazione</button>
-        <div id="removeStationForm" class="section-form">
-            <form id="deleteStationForm">
+        <!-- Aggiorna Slot -->
+        <section id="updateSlot">
+            <div class="section-header">
+                <h2>Aggiorna Slot</h2>
+            </div>
+            <form id="updateSlotForm" class="section-form">
                 <div class="form-group">
-                    <label for="station_id">ID Stazione</label>
-                    <input type="number" id="station_id" class="form-control" required>
+                    <label for="slot_id">ID Slot:</label>
+                    <input type="text" id="slot_id" name="slot_id" required>
                 </div>
-                <button type="submit" class="btn btn-danger">Rimuovi</button>
+                <div class="form-group">
+                    <label for="numero_slot_update">Nuovo Numero di Slot:</label>
+                    <input type="number" id="numero_slot_update" name="numero_slot_update" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Aggiorna Slot</button>
             </form>
-        </div>
+        </section>
 
-        <!-- Sezione Slot -->
-        <div class="section-header">
-            <h2>Gestione Slot</h2>
-            <button class="btn btn-primary mb-3" id="updateSlot">Aggiorna Numero Slot</button>
-        </div>
-        <div id="slotForm" class="section-form">
-            <form id="updateSlotForm">
+        <!-- Rimuovi Stazione -->
+        <section id="removeStation">
+            <div class="section-header">
+                <h2>Rimuovi Stazione</h2>
+            </div>
+            <form id="removeStationForm" class="section-form">
                 <div class="form-group">
-                    <label for="slot_id">ID Stazione</label>
-                    <input type="number" id="slot_id" class="form-control" required>
+                    <label for="station_code">Codice Stazione:</label>
+                    <input type="text" id="station_code" name="station_code" required>
                 </div>
-                <div class="form-group">
-                    <label for="numero_slot_update">Nuovo Numero Slot</label>
-                    <input type="number" id="numero_slot_update" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Aggiorna</button>
+                <button type="submit" class="btn btn-danger">Rimuovi Stazione</button>
             </form>
-        </div>
+        </section>
 
-        <!-- Sezione Biciclette -->
-        <div class="section-header">
-            <h2>Gestione Biciclette</h2>
-            <button class="btn btn-primary mb-3" id="addBike">Aggiungi Bicicletta</button>
-        </div>
-        <div id="bikeForm" class="section-form">
-            <form id="newBikeForm">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="codice_bike">Codice</label>
-                        <input type="text" id="codice_bike" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="GPS">GPS</label>
-                        <input type="text" id="GPS" class="form-control" required>
-                    </div>
+        <!-- Aggiungi Bicicletta -->
+        <section id="addBike">
+            <div class="section-header">
+                <h2>Aggiungi Bicicletta</h2>
+            </div>
+            <form id="addBikeForm" class="section-form">
+                <div class="form-group">
+                    <label for="codice_bike">Codice:</label>
+                    <input type="text" id="codice_bike" name="codice" required>
                 </div>
                 <div class="form-group">
-                    <label for="RFID">RFID</label>
-                    <input type="text" id="RFID" class="form-control" required>
+                    <label for="GPS">GPS:</label>
+                    <input type="text" id="GPS" name="GPS" required>
                 </div>
                 <div class="form-group">
-                    <label for="posizione_attuale">Posizione Attuale</label>
-                    <input type="text" id="posizione_attuale" class="form-control" required>
+                    <label for="RFID">RFID:</label>
+                    <input type="text" id="RFID" name="RFID" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Aggiungi</button>
+                <div class="form-group">
+                    <label for="posizione_attuale">Posizione Attuale:</label>
+                    <input type="text" id="posizione_attuale" name="posizione_attuale" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Aggiungi Bicicletta</button>
             </form>
-        </div>
+        </section>
 
-        <button class="btn btn-danger mb-3" id="removeBike">Rimuovi Bicicletta</button>
-        <div id="removeBikeForm" class="section-form">
-            <form id="deleteBikeForm">
+        <!-- Rimuovi Bicicletta -->
+        <section id="removeBike">
+            <div class="section-header">
+                <h2>Rimuovi Bicicletta</h2>
+            </div>
+            <form id="removeBikeForm" class="section-form">
                 <div class="form-group">
-                    <label for="bike_id">ID Bicicletta</label>
-                    <input type="number" id="bike_id" class="form-control" required>
+                    <label for="bike_codice">Codice Bicicletta:</label>
+                    <input type="text" id="bike_codice" name="bike_codice" required>
                 </div>
-                <button type="submit" class="btn btn-danger">Rimuovi</button>
+                <button type="submit" class="btn btn-danger">Rimuovi Bicicletta</button>
             </form>
-        </div>
+        </section>
 
-        <!-- Sezione Clienti -->
-        <div class="section-header">
-            <h2>Gestione Clienti</h2>
-            <button class="btn btn-primary mb-3" id="updateUser">Modifica Informazioni Cliente</button>
-        </div>
-        <div id="userForm" class="section-form">
-            <form id="updateUserForm">
+        <!-- Aggiorna Utente -->
+        <section id="updateUser">
+            <div class="section-header">
+                <h2>Aggiorna Utente</h2>
+            </div>
+            <form id="updateUserForm" class="section-form">
                 <div class="form-group">
-                    <label for="user_id">ID Cliente</label>
-                    <input type="number" id="user_id" class="form-control" required>
+                    <label for="user_id">ID Utente:</label>
+                    <input type="text" id="user_id" name="user_id" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" class="form-control" required>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
                 </div>
                 <div class="form-group">
-                    <label for="cognome">Cognome</label>
-                    <input type="text" id="cognome" class="form-control" required>
+                    <label for="cognome">Cognome:</label>
+                    <input type="text" id="cognome" name="cognome" required>
                 </div>
                 <div class="form-group">
-                    <label for="numero_tessera">Numero Tessera</label>
-                    <input type="text" id="numero_tessera" class="form-control" required>
+                    <label for="numero_tessera">Numero Tessera:</label>
+                    <input type="text" id="numero_tessera" name="numero_tessera" required>
                 </div>
                 <div class="form-group">
-                    <label for="numero_carta_credito">Numero Carta di Credito</label>
-                    <input type="text" id="numero_carta_credito" class="form-control" required>
+                    <label for="numero_carta_credito">Numero Carta di Credito:</label>
+                    <input type="text" id="numero_carta_credito" name="numero_carta_credito" required>
                 </div>
                 <div class="form-group">
-                    <label for="via">Via</label>
-                    <input type="text" id="via" class="form-control" required>
+                    <label for="via">Via:</label>
+                    <input type="text" id="via" name="via" required>
                 </div>
                 <div class="form-group">
-                    <label for="città">Città</label>
-                    <input type="text" id="città" class="form-control" required>
+                    <label for="città">Città:</label>
+                    <input type="text" id="città" name="città" required>
                 </div>
                 <div class="form-group">
-                    <label for="provincia">Provincia</label>
-                    <input type="text" id="provincia" class="form-control" required>
+                    <label for="provincia">Provincia:</label>
+                    <input type="text" id="provincia" name="provincia" required>
                 </div>
                 <div class="form-group">
-                    <label for="regione">Regione</label>
-                    <input type="text" id="regione" class="form-control" required>
+                    <label for="regione">Regione:</label>
+                    <input type="text" id="regione" name="regione" required>
                 </div>
                 <div class="form-group">
-                    <label for="CAP">CAP</label>
-                    <input type="number" id="CAP" class="form-control" required>
+                    <label for="CAP">CAP:</label>
+                    <input type="text" id="CAP" name="CAP" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Modifica</button>
+                <button type="submit" class="btn btn-primary">Aggiorna Utente</button>
             </form>
-        </div>
+        </section>
+
+        <!-- Mappa -->
+        <div id="map"></div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $("#addStation").click(function(){
-                $("#stationForm").toggle();
+        let map;
+        let markers = [];
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 45.465454, lng: 9.186516},
+                zoom: 9,
             });
+            loadStations();
+        }
 
-            $("#removeStation").click(function(){
-                $("#removeStationForm").toggle();
-            });
-
-            $("#updateSlot").click(function(){
-                $("#slotForm").toggle();
-            });
-
-            $("#addBike").click(function(){
-                $("#bikeForm").toggle();
-            });
-
-            $("#removeBike").click(function(){
-                $("#removeBikeForm").toggle();
-            });
-
-            $("#updateUser").click(function(){
-                $("#userForm").toggle();
-            });
-
-            $("#newStationForm").submit(function(e){
-                e.preventDefault();
-
-                var address = $("#via").val() + ", " + $("#città").val() + ", " + $("#provincia").val() + ", " + $("#regione").val() + ", " + $("#CAP").val();
-                var geocoder = new google.maps.Geocoder();
-
-                geocoder.geocode({'address': address}, function(results, status) {
-                    if (status == 'OK') {
-                        var location = results[0].geometry.location;
-                        $("#latitudine").val(location.lat());
-                        $("#longitudine").val(location.lng());
-
-                        $.ajax({
-                            url: 'addStation.php',
-                            type: 'post',
-                            data: $("#newStationForm").serialize(),
-                            success: function(response){
-                                alert(response.message);
-                                location.reload();
-                            }
+        function loadStations() {
+            $.ajax({
+                url: '../ajax/getStations.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(stazioni) {
+                    clearMarkers();
+                    stazioni.forEach(function(stazione) {
+                        let marker = new google.maps.Marker({
+                            position: { lat: parseFloat(stazione.lat), lng: parseFloat(stazione.lng) },
+                            map: map,
+                            title: stazione.nome
                         });
-                    } else {
-                        alert("Geocode non riuscito: " + status);
-                    }
-                });
+                        markers.push(marker);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert('Errore durante il caricamento delle stazioni.');
+                }
             });
-            $("#deleteStationForm").submit(function(e){
-                e.preventDefault();
+        }
+
+        function clearMarkers() {
+            for (let i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markers = [];
+        }
+
+        $(document).ready(function() {
+            // Inizializza la mappa
+            initMap();
+
+            // Aggiungi Stazione
+            $('#addStationForm').on('submit', function(event) {
+                event.preventDefault();
                 $.ajax({
-                    url: '../ajax/removeStation.php',
-                    type: 'post',
+                    url: '../ajax/addStation.php',
+                    type: 'POST',
                     data: $(this).serialize(),
-                    success: function(response){
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response); // Aggiungi questo per registrare la risposta nel browser
                         alert(response.message);
-                        location.reload();
+                        loadStations();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText); // Aggiungi questo per registrare eventuali errori nella console del browser
+                        alert('Errore durante la richiesta AJAX.');
                     }
                 });
             });
 
-            $("#updateSlotForm").submit(function(e){
-                e.preventDefault();
+            // Aggiorna Slot
+            $('#updateSlotForm').on('submit', function(event) {
+                event.preventDefault();
                 $.ajax({
                     url: '../ajax/updateSlot.php',
-                    type: 'post',
+                    type: 'POST',
                     data: $(this).serialize(),
-                    success: function(response){
+                    dataType: 'json',
+                    success: function(response) {
                         alert(response.message);
-                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert('Errore durante la richiesta AJAX.');
                     }
                 });
             });
 
-            $("#newBikeForm").submit(function(e){
-                e.preventDefault();
+            // Rimuovi Stazione
+            $('#removeStationForm').on('submit', function(event) {
+                event.preventDefault();
+                $.ajax({
+                    url: '../ajax/removeStation.php',
+                    type: 'POST',
+                    data: { codice: $('#station_code').val() },
+                    dataType: 'json',
+                    success: function(response) {
+                        alert(response.message);
+                        loadStations();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert('Errore durante la richiesta AJAX.');
+                    }
+                });
+            });
+
+
+            // Aggiungi Bicicletta
+            $('#addBikeForm').on('submit', function(event) {
+                event.preventDefault();
                 $.ajax({
                     url: '../ajax/addBike.php',
-                    type: 'post',
+                    type: 'POST',
                     data: $(this).serialize(),
-                    success: function(response){
+                    dataType: 'json',
+                    success: function(response) {
                         alert(response.message);
-                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert('Errore durante la richiesta AJAX.');
                     }
                 });
             });
 
-            $("#deleteBikeForm").submit(function(e){
-                e.preventDefault();
+            // Rimuovi Bicicletta
+            $('#removeBikeForm').on('submit', function(event) {
+                event.preventDefault();
                 $.ajax({
                     url: '../ajax/removeBike.php',
-                    type: 'post',
-                    data: $(this).serialize(),
-                    success: function(response){
+                    type: 'POST',
+                    data: { codice: $('#bike_codice').val() }, // Invia il codice della bicicletta anziché l'ID
+                    dataType: 'json',
+                    success: function(response) {
                         alert(response.message);
-                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert('Errore durante la richiesta AJAX.');
                     }
                 });
             });
 
-            $("#updateUserForm").submit(function(e){
-                e.preventDefault();
+
+            // Aggiorna Utente
+            $('#updateUserForm').on('submit', function(event) {
+                event.preventDefault();
                 $.ajax({
                     url: '../ajax/updateUser.php',
-                    type: 'post',
+                    type: 'POST',
                     data: $(this).serialize(),
-                    success: function(response){
+                    dataType: 'json',
+                    success: function(response) {
                         alert(response.message);
-                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                        alert('Errore durante la richiesta AJAX.');
                     }
                 });
             });
