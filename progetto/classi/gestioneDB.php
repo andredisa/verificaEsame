@@ -101,16 +101,17 @@ public function authenticateUser($email, $password)
     }
     public function addStation($codice, $numero_slot, $via, $città, $provincia, $regione, $CAP, $latitudine, $longitudine) {
         $query = $this->connection->prepare("INSERT INTO stazione (codice, numero_slot, via, città, provincia, regione, CAP, latitudine, longitudine) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param("sissssiff", $codice, $numero_slot, $via, $città, $provincia, $regione, $CAP, $latitudine, $longitudine);
+        $query->bind_param("sissssidd", $codice, $numero_slot, $via, $città, $provincia, $regione, $CAP, $latitudine, $longitudine);
         return $query->execute();
     }
     
 
-    public function removeStation($id) {
-        $query = $this->connection->prepare("DELETE FROM stazione WHERE ID=?");
-        $query->bind_param("i", $id);
+    public function removeStation($codice) {
+        $query = $this->connection->prepare("DELETE FROM stazione WHERE codice=?");
+        $query->bind_param("s", $codice);
         return $query->execute();
     }
+    
 
     public function updateSlot($id, $numero_slot) {
         $query = $this->connection->prepare("UPDATE stazione SET numero_slot=? WHERE ID=?");
@@ -125,11 +126,12 @@ public function authenticateUser($email, $password)
         return $query->execute();
     }
 
-    public function removeBike($id) {
-        $query = $this->connection->prepare("DELETE FROM bicicletta WHERE ID=?");
-        $query->bind_param("i", $id);
+    public function removeBike($codice) {
+        $query = $this->connection->prepare("DELETE FROM bicicletta WHERE codice=?");
+        $query->bind_param("s", $codice);
         return $query->execute();
     }
+    
 
     public function updateUser($id, $email, $nome, $cognome, $numero_tessera, $numero_carta_credito, $via, $città, $provincia, $regione, $CAP) {
         $query = $this->connection->prepare("UPDATE cliente SET email=?, nome=?, cognome=?, numero_tessera=?, numero_carta_credito=?, via=?, città=?, provincia=?, regione=?, CAP=? WHERE ID=?");
