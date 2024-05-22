@@ -1,10 +1,10 @@
 <?php
-include 'gestioneDB.php';
+    require_once("../classi/gestioneDB.php");
 
 $db = new gestioneDB();
 $db->conn();
 
-$query = "SELECT latitudine AS lat, longitudine AS lng, nome FROM stazione";
+$query = "SELECT latitudine AS lat, longitudine AS lng, codice FROM stazione";
 $result = $db->connection->query($query);
 
 $stazioni = array();
