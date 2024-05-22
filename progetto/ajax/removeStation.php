@@ -1,20 +1,21 @@
 <?php
-    require_once("../classi/gestioneDB.php");
-    $response = ["status" => false, "message" => "Errore durante la rimozione della stazione."];
+require_once("../classi/gestioneDB.php");
 
-    if (isset($_POST['station_id'])) {
-        $gest = new gestioneDB();
-        $gest->conn();
+$response = ["status" => false, "message" => "Errore durante la rimozione della stazione."];
 
-        $id = $_POST['station_id'];
+if (isset($_POST['codice'])) {
+    $gest = new gestioneDB();
+    $gest->conn();
 
-        if ($gest->removeStation($id)) {
-            $response["status"] = true;
-            $response["message"] = "Stazione rimossa con successo.";
-        }
+    $codice = $_POST['codice'];
 
-        $gest->connection->close();
+    if ($gest->removeStation($codice)) {
+        $response["status"] = true;
+        $response["message"] = "Stazione rimossa con successo.";
     }
 
-    echo json_encode($response);
+    $gest->connection->close();
+}
+
+echo json_encode($response);
 ?>
