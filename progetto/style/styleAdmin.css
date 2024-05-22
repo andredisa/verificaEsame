@@ -28,7 +28,6 @@ h2 {
     margin-bottom: 20px;
 }
 .section-form {
-    display: none;
     margin-bottom: 20px;
 }
 .form-group {
@@ -40,7 +39,8 @@ label {
     margin-bottom: 5px;
 }
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="email"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ced4da;
@@ -63,4 +63,9 @@ input[type="number"] {
 }
 .btn-danger {
     background-color: #dc3545;
+}
+#map {
+    height: 500px;
+    width: 100%;
+    margin-top: 30px;
 }
