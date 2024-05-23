@@ -28,7 +28,7 @@
             $.post("../ajax/registrazione_process.php", formData, function(response) {
                 if (response.status === true) {
                     alert("Registrazione avvenuta con successo!");
-                    window.location = "homePage.php";
+                    window.location = "clientPage.php";
                 } else {
                     alert("Errore durante la registrazione: " + response.message);
                 }

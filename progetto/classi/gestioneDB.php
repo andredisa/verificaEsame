@@ -57,7 +57,7 @@ public function authenticateUser($email, $password)
         return $userID;
     }
 
-    public function getUserIDByEmail($email)
+    public function getClienteIDByEmail($email)
     {
         $userID = -1;
         $query = $this->connection->prepare("SELECT ID FROM cliente WHERE email=?");

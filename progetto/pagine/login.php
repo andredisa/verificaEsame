@@ -51,7 +51,7 @@
                     } else if (response.status === "admin") {
                         window.location.href = "adminPage.php";
                     } else if (response.status === "cliente") {
-                        window.location.href = "homePage.php";
+                        window.location.href = "clientPage.php";
                     }
                 },
                 error: function(xhr, status, error) {

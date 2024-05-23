@@ -1,3 +1,17 @@
+<?php
+if(!isset($_SESSION)){
+    session_start();
+}
+
+if(!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+    header("Location: ../index.html");
+    exit();
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,6 +98,12 @@
 <body>
     <div class="container">
         <h1>Admin Page</h1>
+        <form action="logout.php" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+
+        <!-- Mappa -->
+        <div id="map"></div>
 
         <!-- Aggiungi Stazione -->
         <section id="addStation">
@@ -202,63 +222,6 @@
                 <button type="submit" class="btn btn-danger">Rimuovi Bicicletta</button>
             </form>
         </section>
-
-        <!-- Aggiorna Utente -->
-        <section id="updateUser">
-            <div class="section-header">
-                <h2>Aggiorna Utente</h2>
-            </div>
-            <form id="updateUserForm" class="section-form">
-                <div class="form-group">
-                    <label for="user_id">ID Utente:</label>
-                    <input type="text" id="user_id" name="user_id" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" required>
-                </div>
-                <div class="form-group">
-                    <label for="cognome">Cognome:</label>
-                    <input type="text" id="cognome" name="cognome" required>
-                </div>
-                <div class="form-group">
-                    <label for="numero_tessera">Numero Tessera:</label>
-                    <input type="text" id="numero_tessera" name="numero_tessera" required>
-                </div>
-                <div class="form-group">
-                    <label for="numero_carta_credito">Numero Carta di Credito:</label>
-                    <input type="text" id="numero_carta_credito" name="numero_carta_credito" required>
-                </div>
-                <div class="form-group">
-                    <label for="via">Via:</label>
-                    <input type="text" id="via" name="via" required>
-                </div>
-                <div class="form-group">
-                    <label for="città">Città:</label>
-                    <input type="text" id="città" name="città" required>
-                </div>
-                <div class="form-group">
-                    <label for="provincia">Provincia:</label>
-                    <input type="text" id="provincia" name="provincia" required>
-                </div>
-                <div class="form-group">
-                    <label for="regione">Regione:</label>
-                    <input type="text" id="regione" name="regione" required>
-                </div>
-                <div class="form-group">
-                    <label for="CAP">CAP:</label>
-                    <input type="text" id="CAP" name="CAP" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Aggiorna Utente</button>
-            </form>
-        </section>
-
-        <!-- Mappa -->
-        <div id="map"></div>
     </div>
 
     <script>
@@ -390,25 +353,6 @@
                     url: '../ajax/removeBike.php',
                     type: 'POST',
                     data: { codice: $('#bike_codice').val() }, // Invia il codice della bicicletta anziché l'ID
-                    dataType: 'json',
-                    success: function(response) {
-                        alert(response.message);
-                    },
-                    error: function(xhr, status, error) {
-                        console.log(xhr.responseText);
-                        alert('Errore durante la richiesta AJAX.');
-                    }
-                });
-            });
-
-
-            // Aggiorna Utente
-            $('#updateUserForm').on('submit', function(event) {
-                event.preventDefault();
-                $.ajax({
-                    url: '../ajax/updateUser.php',
-                    type: 'POST',
-                    data: $(this).serialize(),
                     dataType: 'json',
                     success: function(response) {
                         alert(response.message);

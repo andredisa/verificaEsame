@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Mag 22, 2024 alle 14:59
+-- Creato il: Mag 23, 2024 alle 19:54
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -84,7 +84,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`ID`, `email`, `password`, `nome`, `cognome`, `numero_tessera`, `numero_carta_credito`, `via`, `città`, `provincia`, `regione`, `CAP`) VALUES
-(1, 'matteorossi@gmail.com', 'aa9a0040f7c00a74d0362b8c4a214b6e', 'matteo', 'rossi', 12345, 2147483647, 'via Prealpi 47', 'Mariano Comense', 'CO', 'Lombardia', 22066);
+(1, 'matteorossi@gmail.com', 'aa9a0040f7c00a74d0362b8c4a214b6e', 'matteo', 'efe', 12345, 2147483647, 'via Prealpi 47', 'Mariano Comense', 'CO', 'Lombardia', 22066),
+(2, 'marioverdi@gmail.com', 'b5c9e1bd05bb8d8649dd2afca8704921', 'mario', 'rossi', 567890, 2147483647, 'via IV Novembre 45', 'Mariano Comense', 'CO', 'Lombardia', 22066);
 
 -- --------------------------------------------------------
 
@@ -127,7 +128,8 @@ CREATE TABLE `stazione` (
 --
 
 INSERT INTO `stazione` (`ID`, `codice`, `numero_slot`, `via`, `città`, `provincia`, `regione`, `CAP`, `latitudine`, `longitudine`) VALUES
-(1, '1234', 30, 'via Prealpi 47', 'Mariano Comense', 'CO', 'Lombardia', 22066, 45.6993, 9.1883);
+(4, '1234', 30, 'via Prealpi 47', 'Mariano Comense', 'CO', 'Lombardia', 22066, 45.6993, 9.1883),
+(5, '5678', 40, 'via IV Novembre 45', 'Mariano Comense', 'CO', 'Lombardia', 22066, 45.7007, 9.18392);
 
 --
 -- Indici per le tabelle scaricate
@@ -181,13 +183,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT per la tabella `bicicletta`
 --
 ALTER TABLE `bicicletta`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT per la tabella `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `operazione`
@@ -199,7 +201,7 @@ ALTER TABLE `operazione`
 -- AUTO_INCREMENT per la tabella `stazione`
 --
 ALTER TABLE `stazione`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Limiti per le tabelle scaricate
